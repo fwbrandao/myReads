@@ -5,7 +5,7 @@ Link to the project: https://myreads-fernandobrandao.netlify.com
 
 This app was built for the Udacity React Nanodegree Program. It's a personal Book collection with three categories: Reading, Want to read and Read. The purpose of the project is to demonstrate understanding of the basic structure and operation of a React-based app.
 
-
+![screen shot 2018-04-19 at 14 40 18](https://user-images.githubusercontent.com/33375433/38995143-2e5d8158-43e0-11e8-9c15-3c896f530f4a.png)
 
 ## TL;DR
 
