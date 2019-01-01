@@ -12,7 +12,7 @@ render() {
 	const { books, changeShelf } = this.props
 	const { length: count } = books
 
-	if (count === 0) return <p>There are no Books to Recommend!</p>
+	if (count === 0) return <p>Book shelf empty!</p>
 
 return (
 	<ol className="books-grid">
