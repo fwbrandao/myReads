@@ -10,10 +10,14 @@ class BookShelfRecommend extends Component {
 
 render() {
 	const { books, changeShelf } = this.props
+	const { length: count } = books
+
+	if (count === 0) return <p>There are no Books to Recommend!</p>
+
 return (
 	<ol className="books-grid">
   {books.map((book) => (
-	<Recommend 
+	<Recommend
 		book={ book }
 		books={ books }
 		key={ book.id }
@@ -22,7 +26,7 @@ return (
 	))}
 	</ol>
 )
-}	
+}
 }
 
 export default BookShelfRecommend
