@@ -4,6 +4,7 @@
     "cryptiles": "^4.1.3",
     "font-awesome": "^4.7.0",
     "form-serialize": "^0.7.2",
+    "lodash": "^4.17.10",
     "prop-types": "^15.6.1",
     "react": "^15.5.4",
     "react-dom": "^15.5.4",

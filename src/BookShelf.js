@@ -1,23 +1,52 @@
 import React, { Component } from "react";
-import PropTypes from "prop-types";
+// import PropTypes from "prop-types";
 import Book from "./Book";
 import Paginaton from "./common/pagination";
+import { paginate } from './utils/paginate';
+import _ from 'lodash';
 
 class BookShelf extends Component {
-  static propTypes = {
-    books: PropTypes.array.isRequired,
-    changeShelf: PropTypes.func.isRequired
+  state = {
+    books: [],
+    changeShelf: "",
+    pageSize: 4,
+    currentPage: 1,
+    selectedGenre: "",
+    sortColumn: { path: 'title', order: 'asc' }
   };
 
+  getPageData = () => {
+    const {
+            currentPage,
+            pageSize,
+            sortColumn,
+            books: allBooks,
+            selectedGenre
+            } = this.state;
+    const filtered =
+      selectedGenre && selectedGenre._id
+        ? allBooks.filter(m => m.genre._id === selectedGenre._id)
+        : allBooks;
+
+    const sorted = _.orderBy(filtered, [sortColumn.path], [sortColumn.order]);
+
+    const books = paginate(sorted, currentPage, pageSize);
+
+    return { totalCount: filtered.length, data: books };
+    };
+
   render() {
-    const { books, changeShelf } = this.props;
+    const { books, changeShelf, currentPage, pageSize, sortColumn } = this.props;
     const { length: count } = books;
 
-    if (count === 0) return <p>Book shelf empty!</p>;
+    if (count === 0) return <p>Book shelf is empty!</p>;
+
+    const {totalCount} = this.getPageData();
 
     return (
       <div className="row">
         <div className="col-md-12">
+        <p>Showing {totalCount} books.</p>
           <ol className="books-grid">
             {books.map(book => (
               <Book
@@ -29,7 +58,12 @@ class BookShelf extends Component {
             ))}
           </ol>
           <div className="books-grid">
-            <Paginaton />
+            <Paginaton
+              // itemsCount={totalCount}
+              pageSize={pageSize}
+              // onPageChange={this.handlePageChange}
+              currentPage={currentPage}
+            />
           </div>
         </div>
       </div>
