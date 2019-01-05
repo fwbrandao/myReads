@@ -9,45 +9,56 @@ class BookShelf extends Component {
   state = {
     books: [],
     changeShelf: "",
-    pageSize: 4,
+    pageSize: 3,
     currentPage: 1,
-    selectedGenre: "",
-    sortColumn: { path: 'title', order: 'asc' }
+    // selectedGenre: "",
+    // sortColumn: { path: 'title', order: 'asc' }
   };
 
-  getPageData = () => {
-    const {
-            currentPage,
-            pageSize,
-            sortColumn,
-            books: allBooks,
-            selectedGenre
-            } = this.state;
-    const filtered =
-      selectedGenre && selectedGenre._id
-        ? allBooks.filter(m => m.genre._id === selectedGenre._id)
-        : allBooks;
+  handlePageChange = page => {
+    this.setState({ currentPage: page });
+  }
 
-    const sorted = _.orderBy(filtered, [sortColumn.path], [sortColumn.order]);
+  // getPageData = () => {
+  //   const {
+  //           currentPage,
+  //           pageSize,
+  //           sortColumn,
+  //           books: allBooks,
+  //           selectedGenre
+  //           } = this.state;
+  //   const filtered =
+  //     selectedGenre && selectedGenre._id
+  //       ? allBooks.filter(m => m.genre._id === selectedGenre._id)
+  //       : allBooks;
 
-    const books = paginate(sorted, currentPage, pageSize);
+  //   const sorted = _.orderBy(filtered, [sortColumn.path], [sortColumn.order]);
 
-    return { totalCount: filtered.length, data: books };
-    };
+  //   const books = paginate(sorted, currentPage, pageSize);
+
+  //   return { totalCount: filtered.length, data: books };
+  //   };
 
   render() {
-    const { books, changeShelf, currentPage, pageSize, sortColumn } = this.props;
-    const { length: count } = books;
+    const {  books, changeShelf, currentPage, pageSize, sortColumn } = this.props;
 
     if (count === 0) return <p>Book shelf is empty!</p>;
 
-    const {totalCount} = this.getPageData();
+
+    // const books = paginate( currentPage, pageSize);
+
+    const { length: count } = books;
+
+
+
+    // const {totalCount} = this.getPageData();
 
     return (
       <div className="row">
         <div className="col-md-12">
-        <p>Showing {totalCount} books.</p>
-          <ol className="books-grid">
+        <p>Showing {count} books.</p>
+        <nav aria-label="Page navigation example">
+          <ul className="books-grid">
             {books.map(book => (
               <Book
                 book={book}
@@ -56,13 +67,14 @@ class BookShelf extends Component {
                 changeShelf={changeShelf}
               />
             ))}
-          </ol>
+          </ul>
+          </nav>
           <div className="books-grid">
             <Paginaton
-              // itemsCount={totalCount}
-              pageSize={pageSize}
-              // onPageChange={this.handlePageChange}
-              currentPage={currentPage}
+              itemsCount={count}
+              pageSize={this.state.pageSize}
+              onPageChange={this.handlePageChange}
+              currentPage={this.state.currentPage}
             />
           </div>
         </div>
