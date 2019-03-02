@@ -3,7 +3,7 @@ import React, { Component } from "react";
 import Book from "./Book";
 import Paginaton from "./common/pagination";
 import { paginate } from './utils/paginate';
-import _ from 'lodash';
+// import _ from 'lodash';
 
 class BookShelf extends Component {
   state = {
@@ -40,15 +40,14 @@ class BookShelf extends Component {
   //   };
 
   render() {
-    const {  books, changeShelf, currentPage, pageSize, sortColumn } = this.props;
-
-    if (count === 0) return <p>Book shelf is empty!</p>;
+    const { books: allBooks, changeShelf, currentPage, pageSize } = this.props;
 
 
-    // const books = paginate( currentPage, pageSize);
+    const books = paginate(allBooks, currentPage, pageSize);
 
     const { length: count } = books;
 
+    if (count === 0) return <p>Book shelf is empty!</p>;
 
 
     // const {totalCount} = this.getPageData();
@@ -56,18 +55,18 @@ class BookShelf extends Component {
     return (
       <div className="row">
         <div className="col-md-12">
-        <p>Showing {count} books.</p>
-        <nav aria-label="Page navigation example">
-          <ul className="books-grid">
-            {books.map(book => (
-              <Book
-                book={book}
-                books={books}
-                key={book.id}
-                changeShelf={changeShelf}
-              />
-            ))}
-          </ul>
+          <p>Showing {count} books.</p>
+          <nav aria-label="Page navigation example">
+            <ul className="books-grid">
+              {books.map(book => (
+                <Book
+                  book={book}
+                  books={books}
+                  key={book.id}
+                  changeShelf={changeShelf}
+                />
+              ))}
+            </ul>
           </nav>
           <div className="books-grid">
             <Paginaton
