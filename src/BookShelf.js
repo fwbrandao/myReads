@@ -40,10 +40,10 @@ class BookShelf extends Component {
   //   };
 
   render() {
-    const { books: allBooks, changeShelf, currentPage, pageSize } = this.props;
+    const { books, changeShelf} = this.props;
 
 
-    const books = paginate(allBooks, currentPage, pageSize);
+    // const books = paginate(allBooks, currentPage, pageSize);
 
     const { length: count } = books;
 

@@ -51,9 +51,8 @@ class BooksApp extends React.Component {
               books={books}
               changeShelf={this.changeShelf}
             />
-
             <div className="open-MyReads">
-              <Link to="/">MyReads</Link>
+              <Link to="/">Back to MyReads</Link>
             </div>
             <div className="open-search">
               <Link to="/search">Search</Link>
