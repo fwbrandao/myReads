@@ -1,6 +1,5 @@
-Link to the project: https://myreads-fernandobrandao.netlify.com
+Link to the project: https://myreads-bookstore-fernando-brandao.netlify.com/
 
-Portfolio: www.fernandobrandao.co.uk
 
 # MyReads Project
 
